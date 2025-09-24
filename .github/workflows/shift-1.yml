@@ -22,7 +22,7 @@ jobs:
                             -H "X-Interval: 10min" \
                             -H "X-Shift-IST: 5:30AM-11:30AM" \
                             -H "User-Agent: GitHub-Actions-AvisaExperts-Night-1" \
-                            "https://avisaexperts.com/check_schedulenoti.php")
+                            "https://avisaexperts.com/schedulecron/check_schedulenoti.php")
           
           echo "📱 Server Response: $response"
           echo "✅ Night Shift 1 completed successfully"
