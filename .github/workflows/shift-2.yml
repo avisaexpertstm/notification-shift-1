@@ -1,0 +1,29 @@
+name: 🌅 AvisaExperts Morning Shift 2 (6 AM-12 PM UTC)
+
+on:
+  schedule:
+    # Every 10 minutes from 6:00 AM to 11:50 AM UTC
+    - cron: '*/10 6-11 * * *'
+  workflow_dispatch:
+
+jobs:
+  avisaexperts-morning-shift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: AvisaExperts Morning Shift Check
+        run: |
+          echo "🌅 AVISAEXPERTS MORNING SHIFT 2"
+          echo "⏰ Working Hours: 6:00-12:00 PM UTC (11:30 AM-5:30 PM IST)"
+          echo "🕐 Current UTC: $(date -u)"
+          echo "🇮🇳 Current IST: $(TZ='Asia/Kolkata' date)"
+          echo "🔄 Checking for scheduled notifications..."
+          
+          response=$(curl -s -H "X-Shift: AvisaExperts-Morning-2-6AM-12PM" \
+                            -H "X-Interval: 10min" \
+                            -H "X-Shift-IST: 11:30AM-5:30PM" \
+                            -H "User-Agent: GitHub-Actions-AvisaExperts-Morning-2" \
+                            "https://avisaexperts.com/check_schedulenoti.php")
+          
+          echo "📱 Server Response: $response"
+          echo "✅ Morning Shift 2 completed successfully"
+          echo "⏭️  Next check: 10 minutes"
