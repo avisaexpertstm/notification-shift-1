@@ -1,0 +1,29 @@
+name: 🌙 AvisaExperts Night Shift 1 (12-6 AM UTC)
+
+on:
+  schedule:
+    # Every 10 minutes from 12:00 AM to 5:50 AM UTC
+    - cron: '*/10 0-5 * * *'
+  workflow_dispatch:
+
+jobs:
+  avisaexperts-night-shift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: AvisaExperts Night Shift Check
+        run: |
+          echo "🌙 AVISAEXPERTS NIGHT SHIFT 1"
+          echo "⏰ Working Hours: 12:00-6:00 AM UTC (5:30-11:30 AM IST)"
+          echo "🕐 Current UTC: $(date -u)"
+          echo "🇮🇳 Current IST: $(TZ='Asia/Kolkata' date)"
+          echo "🔄 Checking for scheduled notifications..."
+          
+          response=$(curl -s -H "X-Shift: AvisaExperts-Night-1-12AM-6AM" \
+                            -H "X-Interval: 10min" \
+                            -H "X-Shift-IST: 5:30AM-11:30AM" \
+                            -H "User-Agent: GitHub-Actions-AvisaExperts-Night-1" \
+                            "https://avisaexperts.com/check_schedulenoti.php")
+          
+          echo "📱 Server Response: $response"
+          echo "✅ Night Shift 1 completed successfully"
+          echo "⏭️  Next check: 10 minutes"
