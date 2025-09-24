@@ -1,0 +1,29 @@
+name: ☀️ AvisaExperts Afternoon Shift 3 (12-6 PM UTC)
+
+on:
+  schedule:
+    # Every 10 minutes from 12:00 PM to 5:50 PM UTC
+    - cron: '*/10 12-17 * * *'
+  workflow_dispatch:
+
+jobs:
+  avisaexperts-afternoon-shift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: AvisaExperts Afternoon Shift Check
+        run: |
+          echo "☀️ AVISAEXPERTS AFTERNOON SHIFT 3"
+          echo "⏰ Working Hours: 12:00-6:00 PM UTC (5:30-11:30 PM IST)"
+          echo "🕐 Current UTC: $(date -u)"
+          echo "🇮🇳 Current IST: $(TZ='Asia/Kolkata' date)"
+          echo "🔄 Checking for scheduled notifications..."
+          
+          response=$(curl -s -H "X-Shift: AvisaExperts-Afternoon-3-12PM-6PM" \
+                            -H "X-Interval: 10min" \
+                            -H "X-Shift-IST: 5:30PM-11:30PM" \
+                            -H "User-Agent: GitHub-Actions-AvisaExperts-Afternoon-3" \
+                            "https://avisaexperts.com/check_schedulenoti.php")
+          
+          echo "📱 Server Response: $response"
+          echo "✅ Afternoon Shift 3 completed successfully"
+          echo "⏭️  Next check: 10 minutes"
